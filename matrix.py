@@ -60,17 +60,28 @@ print("matrix done")
 # print(ratMatrix[getInnerUserId(1), getInnerItemsId(31)])
 # print(ratMatrix[getInnerUserId(669), getInnerItemsId(785)])
 
-ncenters = 5
+# ncenters = 5
 
-cntr, u, u0, d, jm, p, fpc = fuzz.cluster.cmeans(
-    ratMatrix, ncenters, 2, error=0.005, maxiter=1000, init=None)
+# cntr, u, u0, d, jm, p, fpc = fuzz.cluster.cmeans(
+#     ratMatrix, ncenters, 2, error=0.005, maxiter=1000, init=None)
 
-print("cmeans")
-print(u)
-print(cntr)
+# print("cmeans")
+# print(u)
+# print(cntr)
 
 
-kmeans = KMeans(n_clusters=ncenters, random_state=0).fit(ratMatrix)
-print("kmeans")
-print(kmeans.labels_)
-print(kmeans.cluster_centers_)
+# kmeans = KMeans(n_clusters=ncenters, random_state=0).fit(ratMatrix)
+# print("kmeans")
+# print(kmeans.labels_)
+# print(kmeans.cluster_centers_)
+
+# itemsDf = pd.read_csv("./ml-latest-small/movies.csv")
+
+
+# def mapUserToCategory(userRow):
+#     userCategory = {}
+#     for i in range(len(userRow)):
+#         rating = userRow[i]
+
+
+# mapUserToCategory(ratMatrix[0])
