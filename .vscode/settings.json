@@ -1,9 +1,4 @@
 {
-  "terminal.explorerKind": "external",
   "terminal.integrated.shell.windows": "C:\\Windows\\System32\\bash.exe",
-
-  "code-runner.executorMap": {
-    "powershell": "powershell.exe $(wslpath -w $fullFileName)",
-    "bat": "cmd.exe $(wslpath -w $fullFileName)"
-  }
+  "python.pythonPath": "C:\\Users\\Mustapha\\Anaconda3\\python.exe"
 }

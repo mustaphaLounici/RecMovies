@@ -1,31 +1,28 @@
 import numpy as np
+import matplotlib.pyplot as plt
 import skfuzzy as fuzz
 
-# Define three cluster centers
-centers = [[4, 2],
-           [1, 7],
-           [5, 6]]
 
-# Define three cluster sigmas in x and y, respectively
-sigmas = [[0.8, 0.3],
-          [0.3, 0.5],
-          [1.1, 0.7]]
+class Cmeans:
+    def __init__(self, data):
+        self.data = data
 
-# Generate test data
-np.random.seed(42)  # Set seed for reproducibility
-xpts = np.zeros(1)
-ypts = np.zeros(1)
-labels = np.zeros(1)
-for i, ((xmu, ymu), (xsigma, ysigma)) in enumerate(zip(centers, sigmas)):
-    xpts = np.hstack((xpts, np.random.standard_normal(200) * xsigma + xmu))
-    ypts = np.hstack((ypts, np.random.standard_normal(200) * ysigma + ymu))
-    labels = np.hstack((labels, np.ones(200) * i))
+    def plot_calc_best_k(self, min=1, max=20):
+        Sum_of_squared_distances = []
+        K = range(min, max)
+        data = np.transpose(np.array(self.data))
+        for k in K:
+            cntr, u, u0, d, jm, p, fpc = fuzz.cluster.cmeans(
+                data, k, 2, error=0.001, maxiter=900000, init=None)
 
-alldata = np.vstack((xpts, ypts))
-print(alldata)
-ncenters = 5
+            Sum_of_squared_distances.append(fpc)
+        plt.plot(K, Sum_of_squared_distances, 'bx-')
+        plt.xlabel('k')
+        plt.ylabel('fpc')
+        plt.title('Elbow Method For Optimal k (Cmeans)')
+        plt.show()
 
-
-cntr, u, u0, d, jm, p, fpc = fuzz.cluster.cmeans(
-    alldata, ncenters, 2, error=0.005, maxiter=1000, init=None)
-print(u)
+    def cluster(self, nbrClusters):
+        cntr, u, u0, d, jm, p, fpc = fuzz.cluster.cmeans(
+            self.data, nbrClusters, 2, error=0.001, maxiter=900000, init=None)
+        return cntr, u, u0, d, jm, p, fpc
